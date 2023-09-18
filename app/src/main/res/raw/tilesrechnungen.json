@@ -1,0 +1,12 @@
+{
+  "tilesrechnungen": [
+    {
+      "title": "Rechnung erfassen",
+      "description": "Erfassen mit Zahlungsempfänger und Valutadatum"
+    },
+    {
+      "title": "Ausstehende Zahlungen anschauen",
+      "description": "Zahlungen anschauen und begleichen"
+    }
+  ]
+}

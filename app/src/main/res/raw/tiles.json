@@ -1,0 +1,24 @@
+{
+  "tiles": [
+    {
+      "title": "Rechnungen",
+      "description": "Rechnungen erfassen und bezahlen"
+    },
+    {
+      "title": "Termine",
+      "description": "Termine eintragen und löschen"
+    },
+    {
+      "title": "Universität",
+      "description": "Prüfungsdaten erfassen, Hausaufgaben erfassen"
+    },
+    {
+      "title": "Offene Nachrichten",
+      "description": "Offene Nachrichten von Mail und Whatsapp und SMS"
+    },
+    {
+      "title": "TODOS",
+      "description": "Erfassen von Tasks"
+    }
+  ]
+}
