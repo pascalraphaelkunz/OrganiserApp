@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".Activities.RechnungListView">
+    tools:context=".Activities.Rechnung.RechnungListView">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -19,19 +19,28 @@
             app:navigationIcon="@android:drawable/arrow_up_float"
             app:title="Liste der Rechnungen"></androidx.appcompat.widget.Toolbar>
 
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar"
+            android:text="Button" />
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"
-            android:layout_marginTop="8dp">
+            android:layout_below="@id/button3"
+            android:layout_marginTop="13dp">
+
             <LinearLayout
                 android:id="@+id/invoice_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/toolbar"
+                android:layout_below="@id/button3"
                 android:layout_marginTop="8dp"
                 android:orientation="vertical">
-                <!-- Add your content here -->
+
+
+
             </LinearLayout>
         </ScrollView>
 
