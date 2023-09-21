@@ -2,32 +2,47 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/textViewName"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold"/>
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginEnd="16dp">
 
-    <TextView
-        android:id="@+id/textViewDueDate"
-        android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewDueDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/textViewAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"/>
+
+        <!-- Add a separator bar (moved inside the LinearLayout) -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#CCC" /> <!-- Customize the color and height as needed -->
+
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"/>
-
-    <TextView
-        android:id="@+id/textViewAmount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"/>
-
-    <!-- Add a separator bar -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#CCC" /> <!-- Customize the color and height as needed -->
+        android:layout_gravity="center_vertical" />
 
 </LinearLayout>

@@ -20,22 +20,22 @@
             app:title="Liste der Rechnungen"></androidx.appcompat.widget.Toolbar>
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/payButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/toolbar"
-            android:text="Button" />
+            android:text="Markierte Zahlung als bezahlt markieren" />
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/button3"
+            android:layout_below="@id/payButton"
             android:layout_marginTop="13dp">
 
             <LinearLayout
                 android:id="@+id/invoice_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/button3"
+                android:layout_below="@id/payButton"
                 android:layout_marginTop="8dp"
                 android:orientation="vertical">
 

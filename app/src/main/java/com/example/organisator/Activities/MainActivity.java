@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.example.organisator.Activities.Rechnung.RechnungBase;
 import com.example.organisator.Helpers.Tiles.TileClickListener;
 import com.example.organisator.Helpers.Tiles.TileHelper;
 import com.example.organisator.R;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements TileClickListener
             @Override
             public void onClick(View v) {
                 if (title.equals("Rechnungen")){
-                    Intent intent = new Intent(v.getContext(), Rechnung.class); // Replace NewActivity.class with the name of your new activity
+                    Intent intent = new Intent(v.getContext(), RechnungBase.class); // Replace NewActivity.class with the name of your new activity
                     v.getContext().startActivity(intent);
                 }
             }

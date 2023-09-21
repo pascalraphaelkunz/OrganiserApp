@@ -18,12 +18,12 @@
             android:label="@string/title_activity_rechnung_erfassen"
             android:theme="@style/Theme.Organisator" />
         <activity
-            android:name=".Activities.Rechnung"
+            android:name=".Activities.Rechnung.RechnungBase"
             android:exported="false"
             android:label="@string/title_activity_rechnung"
             android:theme="@style/Theme.Organisator" />
         <activity
-            android:name=".Activities.RechnungListView"
+            android:name=".Activities.Rechnung.RechnungListView"
             android:exported="false"
             android:label="@string/title_activity_rechnung"
             android:theme="@style/Theme.Organisator" />

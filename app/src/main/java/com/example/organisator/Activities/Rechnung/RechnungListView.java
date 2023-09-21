@@ -1,9 +1,12 @@
-package com.example.organisator.Activities;
+package com.example.organisator.Activities.Rechnung;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -36,14 +39,16 @@ public class RechnungListView extends AppCompatActivity {
         }
 
         LinearLayout invoiceListLayout = findViewById(R.id.invoice_list);
+        View listItem = getLayoutInflater().inflate(R.layout.invoice_list, null);
         for (RechnungsDetails rechnungsDetails : cursor.getAllRechnungsDetails()) {
             // Inflate the list_item.xml layout
-            View listItem = getLayoutInflater().inflate(R.layout.invoice_list, null);
+
 
             // Find the TextViews in the inflated layout
             TextView name = listItem.findViewById(R.id.textViewName);
             TextView date = listItem.findViewById(R.id.textViewDueDate);
             TextView amount = listItem.findViewById(R.id.textViewAmount);
+            CheckBox checkBox = listItem.findViewById(R.id.checkBox); // Add this li
 
             amount.setText(rechnungsDetails.getAmount().toString());
             date.setText(rechnungsDetails.getDate().toString());
@@ -51,15 +56,43 @@ public class RechnungListView extends AppCompatActivity {
             listItem.setOnClickListener(setTileClickListener(name.getText().toString()));
             invoiceListLayout.addView(listItem);
         }
+        Button button = getLayoutInflater().inflate(R.layout.rechnung_list_view, null).findViewById(R.id.payButton);
+        button.setOnClickListener(buttonClickListener());
+
     }
 
 
+    private CompoundButton.OnCheckedChangeListener checkButtonListener() {
+        return new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Handle checkbox state change here
+                RechnungsDetails checkedItem = (RechnungsDetails) buttonView.getTag();
+                if (isChecked) {
+                    // Checkbox is checked
+                    // Perform your desired action
+                } else {
+                    // Checkbox is unchecked
+                    // Perform your desired action
+                }
+            }
+        };
+    }
+
+    private View.OnClickListener buttonClickListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        };
+    }
     private View.OnClickListener setTileClickListener(final String tileTitle) {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (tileTitle.equals("Rechnungen")) {
-                    Intent intent = new Intent(v.getContext(), Rechnung.class); // Replace NewActivity.class with the name of your new activity
+                    Intent intent = new Intent(v.getContext(), RechnungBase.class); // Replace NewActivity.class with the name of your new activity
                     v.getContext().startActivity(intent);
                 }
             }

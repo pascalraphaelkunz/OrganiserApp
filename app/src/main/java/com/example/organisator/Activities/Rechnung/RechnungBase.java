@@ -1,16 +1,14 @@
-package com.example.organisator.Activities;
+package com.example.organisator.Activities.Rechnung;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 
 import androidx.appcompat.app.ActionBar;
@@ -23,17 +21,12 @@ import com.example.organisator.Helpers.Tiles.TileClickListener;
 import com.example.organisator.Helpers.Tiles.TileHelper;
 import com.example.organisator.R;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 
 
-public class Rechnung extends AppCompatActivity implements TileClickListener {
-    DatabaseHelperRechnung cursor = new DatabaseHelperRechnung(Rechnung.this);
+public class RechnungBase extends AppCompatActivity implements TileClickListener {
+    DatabaseHelperRechnung cursor = new DatabaseHelperRechnung(RechnungBase.this);
+    RechnungErfassenDialog dialog = new RechnungErfassenDialog();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +43,6 @@ public class Rechnung extends AppCompatActivity implements TileClickListener {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        setTilesFromJSON("tilesrechnungen");
 
         LinearLayout parentLayout = findViewById(R.id.parent_layout);
 
@@ -58,7 +50,7 @@ public class Rechnung extends AppCompatActivity implements TileClickListener {
         TileHelper tileHelper = new TileHelper(this, this);
 
         // Call setTilesFromJSON after setContentView to ensure the context is initialized
-        tileHelper.setTilesFromJSON("tiles", parentLayout, R.raw.tilesrechnungen);
+        tileHelper.setTilesFromJSON("tilesrechnungen", parentLayout, R.raw.tilesrechnungen);
     }
 
     @Override
@@ -71,69 +63,12 @@ public class Rechnung extends AppCompatActivity implements TileClickListener {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setTilesFromJSON(String fileName){
-        LinearLayout parentLayout = findViewById(R.id.parent_layout); // Replace with your parent layout's ID
-        try {
-            // Read the JSON file from the resources
-            Resources resources = getResources();
-            InputStream inputStream = resources.openRawResource(R.raw.tilesrechnungen);
-            int size = inputStream.available();
-            byte[] buffer = new byte[size];
-            inputStream.read(buffer);
-            inputStream.close();
-            String json = new String(buffer, StandardCharsets.UTF_8);
-
-            // Parse the JSON data
-            JSONObject jsonObject = new JSONObject(json);
-            JSONArray tilesArray = jsonObject.getJSONArray(fileName);
-
-            // Create and add tiles based on the JSON data
-            for (int i = 0; i < tilesArray.length(); i++) {
-                View tileLayout = getLayoutInflater().inflate(R.layout.tile_layout, null);
-                JSONObject tileObject = tilesArray.getJSONObject(i);
-                String title = tileObject.getString("title");
-                String description = tileObject.getString("description");
-
-                TextView titleTextView = tileLayout.findViewById(R.id.tile_title);
-                TextView descriptionTextView = tileLayout.findViewById(R.id.tile_description);
-
-                titleTextView.setText(title); // Set the title
-                descriptionTextView.setText(description); // Set the description
-
-
-                tileLayout.setOnClickListener(setTileClickListener(title));
-
-                // Add the tile to the parent layout
-                parentLayout.addView(tileLayout);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private View.OnClickListener setTileClickListener(final String tileTitle) {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (tileTitle.equals("Rechnung erfassen")){
-                    openInputDialogErfassen();
-                }
-                if (tileTitle.equals("Ausstehende Zahlungen anschauen")){
-                    openInputDialogAnschauen(v);
-                }
-            }
-        };
-    }
-
     private void openInputDialogAnschauen(View v){
         Intent intent = new Intent(v.getContext(), RechnungListView.class); // Replace NewActivity.class with the name of your new activity
         v.getContext().startActivity(intent);
     }
 
-    private void openInputDialogErfassen() {
+    private void openInputDialogErfassen(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         // Set the dialog title
@@ -192,8 +127,19 @@ public class Rechnung extends AppCompatActivity implements TileClickListener {
     }
 
 
+
     @Override
     public View.OnClickListener onTileClick(String title) {
-        return null;
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (title.equals("Rechnung erfassen")){
+                    openInputDialogErfassen();
+                }
+                if (title.equals("Ausstehende Zahlungen anschauen")){
+                    openInputDialogAnschauen(v);
+                }
+            }
+        };
     }
 }
